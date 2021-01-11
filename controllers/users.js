@@ -4,7 +4,8 @@ const User = require("../models/user");
 
 usersRouter.post("/", async (request, response) => {
   const body = request.body;
-  console.log(request)
+  console.log("attempting account creation for", request.body.username);
+
   if (body.username.length <= 3 || body.password.length <= 3) {
     return response.status(400).json({
       error: "username and password must have 4 or more characters",
@@ -31,6 +32,8 @@ usersRouter.post("/", async (request, response) => {
   response.json(savedUser);
 });
 
-usersRouter.get("/", async (request, response) => {});
-
+usersRouter.get("/", async (request, response) => {
+  const users = await User.find({}).populate('sayings', {content: 1, time: 1});
+  response.json(users.map((user) => user.toJSON()));
+});
 module.exports = usersRouter;

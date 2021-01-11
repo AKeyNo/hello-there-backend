@@ -5,8 +5,8 @@ const sayingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  content: {
-    type: Date(),
+  time: {
+    type: Date,
     required: true,
   },
   user: {

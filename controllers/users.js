@@ -25,6 +25,7 @@ usersRouter.post("/", async (request, response) => {
     username: body.username,
     firstName: body.firstName,
     lastName: body.lastName,
+    email: body.email,
     passwordHash,
   });
 

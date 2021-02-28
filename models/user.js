@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
   passwordHash: String,
+  email: String,
   sayings: [
     {
       type: mongoose.Schema.Types.ObjectId,

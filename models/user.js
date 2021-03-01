@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
       ref: "Saying",
     },
   ],
+  follows: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  aboutMe: String,
 });
 
 userSchema.plugin(uniqueValidator);

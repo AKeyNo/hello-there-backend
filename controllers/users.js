@@ -50,7 +50,12 @@ usersRouter.get("/info/:username", async (request, response) => {
   const user = await User.findOne({ username: request.params.username });
 
   if (user) {
-    response.json({ aboutMe: user.aboutMe, joined: user.joined});
+    response.json({
+      username: user.username,
+      aboutMe: user.aboutMe,
+      joined: user.joined,
+      location: user.location,
+    });
   } else {
     return response.status(404).json({ error: "no user found..." });
   }

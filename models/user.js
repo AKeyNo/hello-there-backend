@@ -6,11 +6,26 @@ const userSchema = new mongoose.Schema({
     type: String,
     unique: true,
     minlength: 3,
+    required: true
   },
-  firstName: String,
-  lastName: String,
-  passwordHash: String,
-  email: String,
+  firstName: {
+    type: String,
+    minlength: 1,
+    required: true
+  },
+  lastName: {
+    type: String,
+    minlength: 1,
+    required: true
+  },
+  passwordHash:  {
+    type: String,
+    required: true
+  },
+  email:  {
+    type: String,
+    required: true
+  },
   sayings: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,6 +34,11 @@ const userSchema = new mongoose.Schema({
   ],
   follows: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   aboutMe: String,
+  location: String,
+  joined: {
+    type: Date,
+    required: true,
+  },
 });
 
 userSchema.plugin(uniqueValidator);

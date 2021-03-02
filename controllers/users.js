@@ -27,6 +27,9 @@ usersRouter.post("/", async (request, response) => {
     lastName: body.lastName,
     email: body.email,
     passwordHash,
+    aboutMe: `Welcome to ${body.username}'s profile!`,
+    location: "",
+    joined: new Date(),
   });
 
   const savedUser = await user.save();
@@ -35,7 +38,22 @@ usersRouter.post("/", async (request, response) => {
 });
 
 usersRouter.get("/", async (request, response) => {
-  const users = await User.find({}).populate('sayings', {content: 1, time: 1});
+  const users = await User.find({}).populate("sayings", {
+    content: 1,
+    time: 1,
+  });
   response.json(users.map((user) => user.toJSON()));
 });
+
+// returns the user's public information
+usersRouter.get("/info/:username", async (request, response) => {
+  const user = await User.findOne({ username: request.params.username });
+
+  if (user) {
+    response.json({ aboutMe: user.aboutMe, joined: user.joined});
+  } else {
+    return response.status(404).json({ error: "no user found..." });
+  }
+});
+
 module.exports = usersRouter;

@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 sayingsRouter.get("/", async (request, response) => {
   const sayings = await Saying.find({}).populate("user", {
     username: 1,
-    name: 1,
+    firstName: 1,
+    lastName: 1,
   });
   response.json(sayings.map((saying) => saying.toJSON()));
 });
